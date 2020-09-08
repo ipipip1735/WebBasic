@@ -1,5 +1,6 @@
 package servlet;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,19 @@ import java.io.IOException;
  */
 @WebServlet(name = "OneServlet", urlPatterns = {"/one"})
 public class OneServlet extends HttpServlet {
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        System.out.println("~~  " + getClass().getSimpleName() + ".init  ~~");
+        System.out.println("config is " + config);
+        super.init(config);
+    }
+
+    @Override
+    public void init() throws ServletException {
+        System.out.println("~~  " + getClass().getSimpleName() + ".init  ~~");
+        super.init();
+    }
+
     public OneServlet() {
         super();
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
@@ -29,7 +43,9 @@ public class OneServlet extends HttpServlet {
         if (request.getSession().getAttribute("name") == null) {
             request.getSession().setAttribute("name", "bob");
             System.out.println("set seesion name!");
+        } else {
+            response.getWriter().println(request.getSession().getAttribute("name"));
+            System.out.println("session|name = " + request.getSession().getAttribute("name"));
         }
-        response.getWriter().println(request.getSession().getAttribute("name"));
     }
 }
