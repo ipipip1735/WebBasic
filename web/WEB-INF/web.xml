@@ -4,10 +4,20 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!--应用上下文-->
+    <context-param>
+        <param-name>appOne</param-name>
+        <param-value>1000</param-value>
+    </context-param>
+
     <!--这里仅有一个Servlet使用了XML配置，其他Servlet使用了基于注解的配置，所以这里没有定义-->
     <servlet>
         <servlet-name>twoServlet</servlet-name>
         <servlet-class>servlet.TwoServlet</servlet-class>
+         <init-param>
+         <param-name>one</param-name>
+         <param-value>111</param-value>
+         </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>twoServlet</servlet-name>
